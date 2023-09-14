@@ -24,14 +24,7 @@ To build this solution in your AWS environment follow the steps below:
 - set a Terraform API (ex.TF_API_TOKEN) token variable in your cloned repo under "Settings", "Secrets", "Actions"
   https://github.com/YOUR-USER/api-lambda-integration-terraform/settings/secrets/actions
 - set an AWS Account (ex.TF_AWS_ACCT) secret variable same location as above
-- modify the terraform-apply.yml with your organization, workspace and ENV variables
-```env:
-  TF_CLOUD_ORGANIZATION: "YOUR_ORG"
-  TF_API_TOKEN: "${{ secrets.YOUR_TOKEN_SECRET }}"
-  TF_WORKSPACE: "YOUR_WORKSPACE"
-  CONFIG_DIRECTORY: "./"
-  TF_VAR_account_id: ${{ secrets.YOUR_ACCT_SECRET}}```
-
+- modify the terraform-apply.yml with your organization, workspace and ENV variables ** see code block below
 - modify the terraform-plan.yml with your organization, workspace and ENV variables same as above with terraform-apply.yml
 - create a PR and merge your changes
 
@@ -43,3 +36,10 @@ if running local.
 
 Use this URL to send a request with json ex. (curl YOUR_ENDPOINT_URL \
 -d '{"id": "1234", "message": "Hello World"}')
+
+```env:
+  TF_CLOUD_ORGANIZATION: "YOUR_ORG"
+  TF_API_TOKEN: "${{ secrets.YOUR_TOKEN_SECRET }}"
+  TF_WORKSPACE: "YOUR_WORKSPACE"
+  CONFIG_DIRECTORY: "./"
+  TF_VAR_account_id: ${{ secrets.YOUR_ACCT_SECRET}}```
