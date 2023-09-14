@@ -48,5 +48,6 @@ Use this URL to send a request with json ex.
 ```
 
 Response should look like:
-```{"count": "2"}
+```
+{"count": "2"}
 ```
