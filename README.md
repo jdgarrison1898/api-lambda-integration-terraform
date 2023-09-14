@@ -43,7 +43,8 @@ After successfully deploying, the URL of your API endpoint will appear in your T
 if running local.
 
 Use this URL to send a request with json ex. 
-```curl YOUR_ENDPOINT_URL \
+```
+curl YOUR_ENDPOINT_URL \
 -d '{"id": "1234", "message": "Hello World"}'
 ```
 
