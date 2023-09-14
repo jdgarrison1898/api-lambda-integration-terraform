@@ -24,7 +24,7 @@ To build this solution in your AWS environment follow the steps below:
 - set a Terraform API (ex.TF_API_TOKEN) token variable in your cloned repo under "Settings", "Secrets", "Actions"
   https://github.com/YOUR-USER/api-lambda-integration-terraform/settings/secrets/actions
 - set an AWS Account (ex.TF_AWS_ACCT) secret variable same location as above
-- modify the terraform-apply.yml with your organization, workspace and ENV variables ** see code block below
+- modify the terraform-apply.yml with your organization, workspace and ENV variables ** see code block below **
 - modify the terraform-plan.yml with your organization, workspace and ENV variables same as above with terraform-apply.yml
 - create a PR and merge your changes
 
