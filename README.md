@@ -31,6 +31,7 @@ To build this solution in your AWS environment follow the steps below:
   TF_WORKSPACE: "YOUR_WORKSPACE"
   CONFIG_DIRECTORY: "./"
   TF_VAR_account_id: ${{ secrets.YOUR_ACCT_SECRET}}```
+
 - modify the terraform-plan.yml with your organization, workspace and ENV variables same as above with terraform-apply.yml
 - create a PR and merge your changes
 
