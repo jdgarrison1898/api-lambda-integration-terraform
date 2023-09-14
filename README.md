@@ -21,13 +21,20 @@ will trigger the Lambda function which will perform the following operations:
 
 To build this solution in your AWS environment follow the steps below:
 - clone the repo https://github.com/jdgarrison1898/api-lambda-integration-terraform.git
-- modify the terraform-apply.yml with your organization and workspace
-- modify the terraform-plan.yml with your organization and workspace
-- set an Terraform API (TF_API_TOKEN) token variable in your cloned repo under "Settings", "Secrets", "Actions"
+- set a Terraform API (ex.TF_API_TOKEN) token variable in your cloned repo under "Settings", "Secrets", "Actions"
   https://github.com/YOUR-USER/api-lambda-integration-terraform/settings/secrets/actions
+- set an AWS Account (ex.TF_AWS_ACCT) secret variable same location as above
+- modify the terraform-apply.yml with your organization, workspace and ENV variables
+```env:
+  TF_CLOUD_ORGANIZATION: "YOUR_ORG"
+  TF_API_TOKEN: "${{ secrets.YOUR_TOKEN_SECRET }}"
+  TF_WORKSPACE: "YOUR_WORKSPACE"
+  CONFIG_DIRECTORY: "./"
+  TF_VAR_account_id: ${{ secrets.YOUR_ACCT_SECRET}}```
+- modify the terraform-plan.yml with your organization, workspace and ENV variables same as above with terraform-apply.yml
 - create a PR and merge your changes
 
-**If running this locally without Terraform Cloud/GitHub Actions, modify the variables.tf in the root with your AWS details**
+**If running this locally without Terraform Cloud/GitHub Actions, you will need to pass variables for your AWS account/region details**
 
 # Post-Deployment Validation
 After successfully deploying, the URL of your API endpoint will appear in your Terraform Cloud workspace runs or terminal output
