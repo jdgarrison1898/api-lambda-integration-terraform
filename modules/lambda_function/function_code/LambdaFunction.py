@@ -13,7 +13,7 @@ def handler(event, context):
     dynamodb_resource = boto3.resource("dynamodb")
     table_name = "lambda-apigateway"
     table = dynamodb_resource.Table(table_name)
-    item_key = {"id":'1234'}
+    item_key = {"id":'count'}
 
     # fetch current value in count
     def get_single_item(item_key):
@@ -33,18 +33,30 @@ def handler(event, context):
        table = dynamodb_resource.Table(table_name)
        response = table.put_item(
          Item={
-           "id": "1234",
+           "id": "count",
            "count": messagecount + currentcount
          }
     )
+    def put_message_id_using_resource():
+        dynamodb_resource = boto3.resource("dynamodb")
+        table = dynamodb_resource.Table(table_name)
+        response = table.put_item(
+            Item={
+                "id": message_id,
+                "message_count": messagecount
+            })
 
     # grab input data and count words
+    message_id = event.get('id')
+    print('message id = ', message_id)
     print('current count =', currentcount)
     message_string = event.get('message')
+    message_id = event.get('id')
     data = json.dumps(message_string)
     messagecount = len(data.split())
     print('new count =', messagecount)
     put_item_using_resource()
+    put_message_id_using_resource()
     totalcount = currentcount + messagecount
     print('total count =', totalcount)
     return str(totalcount)
