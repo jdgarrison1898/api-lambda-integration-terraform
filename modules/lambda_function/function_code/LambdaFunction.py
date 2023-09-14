@@ -59,4 +59,6 @@ def handler(event, context):
     put_message_id_using_resource()
     totalcount = currentcount + messagecount
     print('total count =', totalcount)
-    return str(totalcount)
+    return {
+        'count': str(totalcount)
+    }
