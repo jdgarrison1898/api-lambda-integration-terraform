@@ -4,14 +4,11 @@ data "archive_file" "lambda_code" {
   source_dir  = "${path.module}/function_code"
   output_path = "${path.module}/function_code.zip"
 }
+//bucket for the lambda code
 resource "aws_s3_bucket" "lambda_bucket" {
   bucket = var.s3_bucket_name
 }
-//making the s3 bucket private as it houses the lambda code:
-#resource "aws_s3_bucket_acl" "lambda_bucket_acl" {
-#  bucket = aws_s3_bucket.lambda_bucket.id
-#  acl    = "private"
-#}
+//lambda
 resource "aws_s3_object" "lambda_code" {
   bucket = aws_s3_bucket.lambda_bucket.id
   key    = "function_code.zip"
@@ -27,10 +24,12 @@ resource "aws_lambda_function" "lambda_function" {
   source_code_hash = data.archive_file.lambda_code.output_base64sha256
   role             = aws_iam_role.lambda_execution_role.arn
 }
+//logs
 resource "aws_cloudwatch_log_group" "lambda_log_group" {
   name              = "/aws/lambda/${aws_lambda_function.lambda_function.function_name}"
   retention_in_days = 30
 }
+//lambda role
 resource "aws_iam_role" "lambda_execution_role" {
   name = "lambda_execution_role_${var.lambda_function_name}"
   assume_role_policy = jsonencode({
@@ -46,7 +45,13 @@ resource "aws_iam_role" "lambda_execution_role" {
     ]
   })
 }
+//lambda role policies
 resource "aws_iam_role_policy_attachment" "lambda_policy" {
+  for_each = toset([
+    "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+  ])
+
   role       = aws_iam_role.lambda_execution_role.name
-  policy_arn = "arn:aws:iam::369053409637:policy/lambda-apigateway-policy"
+  policy_arn = each.value
 }
