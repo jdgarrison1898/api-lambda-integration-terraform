@@ -8,7 +8,7 @@ variable "region" {
   type    = string
   default = "us-east-1"
 }
-variable "account_id"{
+variable "TF_VAR_account_id"{
   type        = string
   description = "The account ID in which to create/manage resources"
   sensitive   = true
