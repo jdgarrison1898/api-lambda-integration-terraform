@@ -36,7 +36,7 @@ resource "aws_api_gateway_integration" "rest_api_get_method_integration" {
   rest_api_id             = aws_api_gateway_rest_api.rest_api.id
   resource_id             = aws_api_gateway_resource.rest_api_resource.id
   http_method             = aws_api_gateway_method.rest_api_get_method.http_method
-  integration_http_method = "POST"
+  integration_http_method = "GET"
   type                    = "AWS"
   uri                     = var.lambda_function_arn
 }
@@ -46,6 +46,9 @@ resource "aws_api_gateway_method_response" "rest_api_get_method_response_200"{
   resource_id = aws_api_gateway_resource.rest_api_resource.id
   http_method = aws_api_gateway_method.rest_api_get_method.http_method
   status_code = "200"
+  response_models = {
+    "application/json" = "Hello"
+  }
 }
 //post method response
 resource "aws_api_gateway_method_response" "rest_api_post_method_response_200"{
@@ -55,6 +58,16 @@ resource "aws_api_gateway_method_response" "rest_api_post_method_response_200"{
   status_code = "200"
   response_models = {
     "application/json" = "Empty"
+  }
+}
+//get integration response
+resource "aws_api_gateway_integration_response" "rest_api_get_integration_response"{
+  rest_api_id = aws_api_gateway_rest_api.rest_api.id
+  resource_id = aws_api_gateway_resource.rest_api_resource.id
+  http_method = aws_api_gateway_method.rest_api_get_method.http_method
+  status_code = aws_api_gateway_method_response.rest_api_get_method_response_200.status_code
+  response_templates = {
+    "application/json" = "Hello"
   }
 }
 //post integration response
