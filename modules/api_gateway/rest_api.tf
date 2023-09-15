@@ -67,7 +67,7 @@ resource "aws_api_gateway_integration_response" "rest_api_get_integration_respon
   http_method = aws_api_gateway_method.rest_api_get_method.http_method
   status_code = aws_api_gateway_method_response.rest_api_get_method_response_200.status_code
   response_templates = {
-    "application/json" = "Empty"
+    "application/json" = ""
   }
 }
 //post integration response
