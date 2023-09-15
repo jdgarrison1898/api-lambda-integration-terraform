@@ -8,7 +8,7 @@ The endpoint should return a json response "count" and the total number of words
 Subsequent messages will add to this count. 
 
 # Overview
-This solution is developed for AWS deployment and consists of an API Gateway integrated with a Lambda function and Dynamodb table. Requests to the endpoint 
+This solution is developed for **AWS deployment** and consists of an API Gateway integrated with a Lambda function and Dynamodb table. Requests to the endpoint 
 will trigger the Lambda function which will perform the following operations:
  - Fetch the current count value in the dynamodb table
  - Calculate the new count of words in the message
