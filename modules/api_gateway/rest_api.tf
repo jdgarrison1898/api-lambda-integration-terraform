@@ -61,11 +61,11 @@ resource "aws_api_gateway_method_response" "rest_api_post_method_response_200"{
   }
 }
 //get integration response
-resource "aws_api_gateway_integration_response" "rest_api_post_integration_response"{
+resource "aws_api_gateway_integration_response" "rest_api_get_integration_response"{
   rest_api_id = aws_api_gateway_rest_api.rest_api.id
   resource_id = aws_api_gateway_resource.rest_api_resource.id
-  http_method = aws_api_gateway_method.rest_api_post_method.http_method
-  status_code = aws_api_gateway_method_response.rest_api_post_method_response_200.status_code
+  http_method = aws_api_gateway_method.rest_api_get_method.http_method
+  status_code = aws_api_gateway_method_response.rest_api_get_method_response_200.status_code
   response_templates = {
     "application/json" = "Hello"
   }
