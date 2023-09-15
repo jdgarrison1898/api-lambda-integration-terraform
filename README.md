@@ -42,7 +42,7 @@ To build this solution in your AWS environment follow the steps below:
 After successfully deploying, the URL of your API endpoint will appear in your Terraform Cloud workspace runs or terminal output
 if running local.
 
-Use this URL to send a request with json ex. 
+Use this URL to send a POST request with json ex. 
 ```
 curl YOUR_ENDPOINT_URL \
 -d '{"id": "1234", "message": "Hello World"}'
